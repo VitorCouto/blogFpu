@@ -1,0 +1,80 @@
+<html>
+	<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+		integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+		crossorigin="anonymous" />
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+		integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+		crossorigin="anonymous" />
+	</head>
+	
+	<body>
+		
+		<!-- inicio class container -->
+		<div class="container">			
+			<!-- inicio class row -->
+			<div class="row">				
+				<!--inicio form -->
+				<form action="/save" method="post">
+					
+					<label>Nome:</label>
+					<input type="hidden" th:value="${post.id}"  name="id"/>
+					<input type="text" th:value="${post.nome}" class="form-control" placeholder="Nome" name="nome"/>
+					
+					<br />
+					
+					<label>Titulo:</label>
+					<input type="text" th:value="${post.titulo}" class="form-control" placeholder="Titulo" name="titulo"/>
+					
+					<br />
+					
+					<label>Post:</label>
+					<input type="text" th:value="${post.postagem}" class="form-control" placeholder="Postagem" name="postagem"/>
+
+					
+					<br />
+					
+					<button type="submit" class="btn btn-default">Enviar</button>
+						
+				<!-- fim form	 -->
+				</form>		
+			<!-- fim class row -->
+			</div>
+			
+			<!-- inicio class table -->
+			<table class="table">
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Titulo</th>
+					<th>Postagem</th>
+				</tr>
+				
+				<tbody>
+					<tr th:each="post:${posts}">
+						<td th:text="${post.id}"></td>
+					
+						<td th:text="${post.nome}"></td>
+						
+						
+						<td> <a th:href="@{/comentario(id=${post.id})}"><span th:text="${post.titulo}"> </span></a></td>
+						
+						
+						<td th:text="${post.postagem}"></td>
+						<td> <a th:href="@{/del(id=${post.id})}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td> <a th:href="@{/(id=${post.id})}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a></td>
+					</tr>
+				</tbody>
+			<!-- inicio class table -->
+			</table>			
+		<!-- Fim class container	 -->
+		</div> 
+		
+	</body>
+	
+</html>
